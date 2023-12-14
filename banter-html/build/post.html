@@ -1,0 +1,1127 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;1,400&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="css/main.css" />
+
+    <!-- AlpineJS -->
+    <script
+      defer
+      src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"
+    ></script>
+
+    <!-- Favicons -->
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="images/favicons/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="images/favicons/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="images/favicons/favicon-16x16.png"
+    />
+    <link rel="manifest" href="images/favicons/site.webmanifest" />
+    <link
+      rel="mask-icon"
+      href="images/favicons/safari-pinned-tab.svg"
+      color="#b91c1c"
+    />
+    <meta name="msapplication-TileColor" content="#f1f1f1" />
+    <meta name="theme-color" content="#ffffff" />
+
+    <!-- PAGE TITLE -->
+    <title>Banter - Post</title>
+  </head>
+  <body>
+    <!-- Navigation -->
+    <!-- 
+      The navigation uses Alpine.js for both the programs dropdown and the mobile navigation menu. If you're
+      not familiar with Alpine you can check out their documentation 
+      here: https://alpinejs.dev/start-here
+    -->
+    <header
+      class="relative border-b border-gray-300/60 bg-transparent"
+      x-data="{ mobileMenuOpen: false }"
+    >
+      <nav
+        class="mx-auto flex h-20 max-w-7xl items-center px-4 sm:px-6 lg:px-8"
+      >
+        <!-- Main navbar for large screens -->
+        <div class="flex w-full items-center justify-between">
+          <!-- Logo-->
+          <div class="flex shrink-0 items-center">
+            <a href="index.html" class="lg:hidden">
+              <img src="images/banter-icon-logo.png" class="h-9 w-auto" />
+            </a>
+            <a href="index.html" class="hidden lg:block">
+              <img src="images/banter-logo.png" class="h-9 w-auto" />
+            </a>
+          </div>
+
+          <!-- Navigation for large screens -->
+          <div
+            class="ml-6 hidden items-center justify-between text-xl md:flex md:space-x-0.5 md:text-base lg:space-x-2"
+          >
+            <!-- Current: "text-red-700", Default: "text-gray-800 hover:text-red-700 transition duration-300 ease-in-out" -->
+            <a
+              href="category.html"
+              class="px-3 py-1 text-md font-medium text-gray-800 transition duration-300 ease-in-out hover:text-red-700"
+            >
+              Technology
+            </a>
+            <a
+              href="category.html"
+              class="px-3 py-1 text-md font-medium text-gray-800 transition duration-300 ease-in-out hover:text-red-700"
+            >
+              Startup
+            </a>
+            <a
+              href="category.html"
+              class="px-3 py-1 text-md font-medium text-gray-800 transition duration-300 ease-in-out hover:text-red-700"
+            >
+              Design
+            </a>
+            <a
+              href="category.html"
+              class="px-3 py-1 text-md font-medium text-gray-800 transition duration-300 ease-in-out hover:text-red-700"
+            >
+              Innovation
+            </a>
+
+            <!-- Template pages dropdown container -->
+            <div class="relative" x-data="{ open: false }">
+              <!-- Pages dropdown button -->
+              <button
+                type="button"
+                class="group flex items-center px-3 py-1 text-md font-medium text-gray-800 transition duration-300 ease-in-out hover:text-red-700"
+                @click="open = true"
+              >
+                <span :class="{'text-red-700': open}">Pages</span>
+
+                <!-- Heroicon name: solid/chevron-down -->
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="ml-2 h-5 w-5 transform text-gray-600 duration-300 group-hover:text-red-700"
+                  :class="{'rotate-180 text-red-700': open}"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
+              </button>
+
+              <!-- Pages dropdown -->
+              <div
+                style="display: none"
+                class="absolute right-0 z-20 mt-3 w-52 space-y-1 rounded-xl bg-white p-2.5 outline-none drop-shadow filter focus:outline-none"
+                x-show.transition="open"
+                @click.away="open = false"
+              >
+                <a
+                  href="index.html"
+                  class="block rounded-lg px-5 py-3.5 font-medium text-gray-800 transition duration-300 ease-in-out hover:bg-gray-50 hover:text-red-700"
+                >
+                  Home
+                </a>
+                <a
+                  href="category.html"
+                  class="block rounded-lg px-5 py-3.5 font-medium text-gray-800 transition duration-300 ease-in-out hover:bg-gray-50 hover:text-red-700"
+                >
+                  Category page
+                </a>
+                <a
+                  href="post.html"
+                  class="block rounded-lg px-5 py-3.5 font-medium text-gray-800 transition duration-300 ease-in-out hover:bg-gray-50 hover:text-red-700"
+                >
+                  Post
+                </a>
+                <a
+                  href="author.html"
+                  class="block rounded-lg px-5 py-3.5 font-medium text-gray-800 transition duration-300 ease-in-out hover:bg-gray-50 hover:text-red-700"
+                >
+                  Author page
+                </a>
+                <a
+                  href="tag.html"
+                  class="block rounded-lg px-5 py-3.5 font-medium text-gray-800 transition duration-300 ease-in-out hover:bg-gray-50 hover:text-red-700"
+                >
+                  Tag page
+                </a>
+                <a
+                  href="about.html"
+                  class="block rounded-lg px-5 py-3.5 font-medium text-gray-800 transition duration-300 ease-in-out hover:bg-gray-50 hover:text-red-700"
+                >
+                  About us
+                </a>
+                <a
+                  href="contact.html"
+                  class="block rounded-lg px-5 py-3.5 font-medium text-gray-800 transition duration-300 ease-in-out hover:bg-gray-50 hover:text-red-700"
+                >
+                  Contact us
+                </a>
+                <a
+                  href="privacy-policy.html"
+                  class="block rounded-lg px-5 py-3.5 font-medium text-gray-800 transition duration-300 ease-in-out hover:bg-gray-50 hover:text-red-700"
+                >
+                  Privacy policy
+                </a>
+                <a
+                  href="404.html"
+                  class="block rounded-lg px-5 py-3.5 font-medium text-gray-800 transition duration-300 ease-in-out hover:bg-gray-50 hover:text-red-700"
+                >
+                  404 page
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Search -->
+          <div class="relative ml-6 h-10 w-full max-w-xxs rounded-3xl">
+            <form class="group rounded-3xl transition duration-300 ease-in-out">
+              <div class="absolute inset-y-0 left-3 flex items-center">
+                <!-- Heroicon name: solid/search -->
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-5 w-5 text-gray-400"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
+              </div>
+
+              <input
+                type="email"
+                class="h-10 w-full rounded-3xl border border-gray-200 bg-white px-10 py-3 text-sm leading-5 text-gray-800 transition duration-300 ease-in-out hover:bg-gray-50 focus:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-red-100"
+                required
+                placeholder="Search..."
+                ,
+                autocomplete="email"
+              />
+            </form>
+          </div>
+
+          <!-- Hamburger menu button -->
+          <button
+            class="group relative ml-6 flex cursor-pointer items-center justify-center rounded-xl bg-gray-50 p-3 transition duration-300 ease-in-out hover:bg-gray-100 focus:outline-none md:hidden"
+            aria-label="Toggle Navigation"
+            @click="mobileMenuOpen = !mobileMenuOpen"
+          >
+            <span
+              class="relative h-3.5 w-4 transform transition duration-500 ease-in-out"
+            >
+              <span
+                class="absolute block h-0.5 rotate-0 transform rounded-full bg-gray-600 opacity-100 transition-all duration-300 ease-in-out group-hover:bg-gray-900"
+                :class="mobileMenuOpen ? 'w-0 top-1.5 left-1/2': 'top-0 left-0 w-full'"
+              ></span>
+              <span
+                class="absolute left-0 top-1.5 block h-0.5 w-full transform rounded-full bg-gray-600 opacity-100 transition-all duration-300 ease-in-out group-hover:bg-gray-900"
+                :class="mobileMenuOpen ? 'rotate-45': 'rotate-0'"
+              ></span>
+              <span
+                class="absolute left-0 top-1.5 block h-0.5 w-full transform rounded-full bg-gray-600 opacity-100 transition-all duration-300 ease-in-out group-hover:bg-gray-900"
+                :class="mobileMenuOpen ? '-rotate-45': 'rotate-0'"
+              ></span>
+              <span
+                class="absolute block h-0.5 rotate-0 transform rounded-full bg-gray-600 opacity-100 transition-all duration-300 ease-in-out group-hover:bg-gray-900"
+                :class="mobileMenuOpen ? 'top-1.5 left-1/2 w-0': 'left-0 top-3 w-full'"
+              ></span>
+            </span>
+          </button>
+        </div>
+      </nav>
+
+      <!-- Mobile menu -->
+      <nav
+        class="md:hidden"
+        aria-label="Global"
+        id="mobile-menu"
+        x-show="mobileMenuOpen"
+        @keydown.escape.window="mobileMenuOpen = false"
+      >
+        <div class="space-y-1 px-2 pb-3 pt-2">
+          <!-- Current: "bg-gray-50 text-red-700", Default: "text-gray-800 hover:bg-gray-50 hover:text-red-700 transition duration-300 ease-in-out" -->
+          <a
+            href="category.html"
+            class="block rounded-lg bg-gray-50 px-4 py-3 font-medium text-red-700"
+            aria-current="page"
+            >Technology</a
+          >
+
+          <a
+            href="category.html"
+            class="block rounded-lg px-4 py-3 font-medium text-gray-800 transition duration-300 ease-in-out hover:bg-gray-50 hover:text-red-700"
+            >Startup</a
+          >
+
+          <a
+            href="category.html"
+            class="block rounded-lg px-4 py-3 font-medium text-gray-800 transition duration-300 ease-in-out hover:bg-gray-50 hover:text-red-700"
+            >Design</a
+          >
+
+          <a
+            href="category.html"
+            class="block rounded-lg px-4 py-3 font-medium text-gray-800 transition duration-300 ease-in-out hover:bg-gray-50 hover:text-red-700"
+            >Innovation</a
+          >
+
+          <a
+            href="category.html"
+            class="block rounded-lg px-4 py-3 font-medium text-gray-800 transition duration-300 ease-in-out hover:bg-gray-50 hover:text-red-700"
+            >Science</a
+          >
+        </div>
+        <div class="border-t border-gray-300/70 pb-3 pt-4">
+          <div
+            class="mt-2 px-6 text-xs font-medium uppercase tracking-widest text-gray-500"
+          >
+            Pages
+          </div>
+          <div class="mt-3 space-y-1 px-2">
+            <!-- Current: "bg-gray-50 text-red-700", Default: "text-gray-600 hover:bg-gray-50 hover:text-red-700 transition duration-300 ease-in-out" -->
+            <a
+              href="index.html"
+              class="block rounded-lg px-4 py-2 font-medium text-gray-600 transition duration-300 ease-in-out hover:bg-gray-50 hover:text-red-700"
+            >
+              Home
+            </a>
+            <a
+              href="category.html"
+              class="block rounded-lg px-4 py-2 font-medium text-gray-600 transition duration-300 ease-in-out hover:bg-gray-50 hover:text-red-700"
+            >
+              Post archive
+            </a>
+            <a
+              href="post.html"
+              class="block rounded-lg px-4 py-2 font-medium text-gray-600 transition duration-300 ease-in-out hover:bg-gray-50 hover:text-red-700"
+            >
+              Post
+            </a>
+            <a
+              href="author.html"
+              class="block rounded-lg px-4 py-2 font-medium text-gray-600 transition duration-300 ease-in-out hover:bg-gray-50 hover:text-red-700"
+            >
+              Author page
+            </a>
+            <a
+              href="tag.html"
+              class="block rounded-lg px-4 py-2 font-medium text-gray-600 transition duration-300 ease-in-out hover:bg-gray-50 hover:text-red-700"
+            >
+              Tag page
+            </a>
+            <a
+              href="about.html"
+              class="block rounded-lg px-4 py-2 font-medium text-gray-600 transition duration-300 ease-in-out hover:bg-gray-50 hover:text-red-700"
+            >
+              About us
+            </a>
+            <a
+              href="contact.html"
+              class="block rounded-lg px-4 py-2 font-medium text-gray-600 transition duration-300 ease-in-out hover:bg-gray-50 hover:text-red-700"
+            >
+              Contact us
+            </a>
+            <a
+              href="privacy-policy.html"
+              class="block rounded-lg px-4 py-2 font-medium text-gray-600 transition duration-300 ease-in-out hover:bg-gray-50 hover:text-red-700"
+            >
+              Privacy policy
+            </a>
+            <a
+              href="404.html"
+              class="block rounded-lg px-4 py-2 font-medium text-gray-600 transition duration-300 ease-in-out hover:bg-gray-50 hover:text-red-700"
+            >
+              404 page
+            </a>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <!-- Post -->
+    <article class="bg-gray-50 pb-12 sm:pb-16 lg:pb-24">
+      <!-- Post Header -->
+      <header>
+        <!-- Image -->
+        <div class="aspect-h-2 aspect-w-3 w-full sm:aspect-h-1">
+          <img
+            src="images/post-header-image.jpeg"
+            class="object-cover object-center"
+          />
+        </div>
+
+        <!-- Post Header Content -->
+        <div class="px-5 lg:px-0">
+          <!-- Article Information -->
+          <div
+            class="mx-auto mb-8 max-w-prose border-b border-gray-300/70 pb-8 pt-10 text-lg sm:pt-16"
+          >
+            <a
+              href="category.html"
+              class="transition-color relative text-sm font-medium uppercase tracking-widest text-red-700 duration-300 ease-in-out hover:text-red-600"
+              >Technology</a
+            >
+
+            <h2
+              class="mt-3.5 text-4xl font-medium tracking-normal text-gray-900 decoration-red-300 decoration-3 transition duration-300 ease-in-out group-hover:underline sm:mt-5 sm:text-5xl sm:leading-tight md:tracking-tight lg:text-6xl"
+            >
+              Apple to Turn IPhones Into Payment Terminals in Fintech Push
+            </h2>
+
+            <div>
+              <p class="mt-4 text-base leading-loose text-gray-600">
+                Apple Inc is introducing a new feature that will allow
+                businesses to accept credit card and digital payments with just
+                a tap on their iPhones, bypassing hardware systems such as Block
+                Inc's Square terminals.
+              </p>
+            </div>
+
+            <!-- Author meta -->
+            <div class="mt-6 flex items-center sm:mt-8">
+              <a href="author.html" class="mr-3 flex-shrink-0">
+                <div class="relative">
+                  <img
+                    class="h-8 w-8 rounded-xl object-cover object-center sm:h-9 sm:w-9"
+                    src="images/author-01.jpeg"
+                    alt=""
+                  />
+                  <span
+                    class="absolute inset-0 rounded-xl shadow-inner"
+                    aria-hidden="true"
+                  ></span>
+                </div>
+              </a>
+
+              <div class="flex items-center text-sm lg:text-[15px]">
+                <span class="hidden text-gray-500 sm:inline-block"
+                  >By&nbsp;</span
+                >
+                <a
+                  class="font-medium text-gray-700 hover:underline"
+                  href="author.html"
+                  >Mark Jackson</a
+                >
+
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="ml-3 h-[18px] w-[18px] text-gray-400"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                  />
+                </svg>
+                <span class="ml-1 text-gray-500">Nov 2, 2020</span>
+
+                <span class="hidden items-center sm:flex">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="ml-2.5 h-[18px] w-[18px] text-gray-400"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                    />
+                  </svg>
+                  <span class="ml-1 text-gray-500">15 min read</span>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <div class="px-5 lg:px-0">
+        <!-- Post Content -->
+        <!-- Uses the official Tailwind CSS Typography plugin -->
+        <div
+          class="prose mx-auto sm:prose-lg first-letter:text-4xl first-letter:font-bold first-letter:tracking-[.15em] prose-a:transition prose-a:duration-300 prose-a:ease-in-out hover:prose-a:text-red-700 prose-img:rounded-xl"
+        >
+          <p>
+            Aliqua venenatis gravida et urna molestie leo adipiscing dolore leo
+            euismod quam. Aenean porta curabitur convallis pellentesque velit
+            platea at neque phasellus. Aliquet pellentesque senectus velit magna
+            ultrices iaculis justo habitasse vitae neque ornare nullam leo. Est
+            facilisis mauris purus senectus nunc convallis praesent pharetra
+            dictum dui molestie iaculis.
+          </p>
+          <h2>An awesome heading</h2>
+          <p>
+            Lorem ipsum dolor sit amet aliqua enim hac. Diam eros adipiscing
+            aliquam nisi do augue mattis sodales turpis lectus a. Curabitur
+            nullam sodales phasellus donec nec pharetra quisque. Nec mi congue
+            lobortis eget aliqua donec diam sollicitudin eu phasellus facilisi
+            dictumst. Venenatis volutpat mi sodales facilisi quisque pulvinar
+            luctus eros est malesuada risus porta sed id.
+          </p>
+          <p>
+            Lorem ipsum dolor sit amet curabitur malesuada vel praesent magna
+            tincidunt.
+          </p>
+          <figure>
+            <img src="images/post-content-image.jpeg" />
+            <figcaption>
+              Lorem ipsum dolor sit amet fringilla consectetur netus
+              ullamcorper.
+            </figcaption>
+          </figure>
+          <p>
+            Lorem ipsum dolor sit amet netus viverra neque quisque nisi mattis
+            dapibus dictumst. Erat venenatis iaculis a tellus a auctor cursus
+            morbi neque molestie incididunt faucibus.
+          </p>
+          <ul>
+            <li>
+              Urna magna mauris hendrerit molestie rhoncus enim magna tempor
+              nisi.
+            </li>
+            <li>Lorem ipsum dolor sit amet tempus bibendum dolore ida.</li>
+            <li>
+              Eget consectetur orci sodales purus ac egestas consequat erat
+              mattis mi sapien adipiscing hac.
+            </li>
+          </ul>
+          <p>
+            Lorem ipsum dolor sit amet lobortis risus nisi lacus quisque
+            porttitor fermentum arcu adipiscing.
+          </p>
+          <p>
+            Lorem ipsum dolor sit amet <strong>bold text</strong> quam luctus
+            praesent id.Gravida donec morbi incididunt enim sed sollicitudin
+            malesuada tempus.
+          </p>
+          <h2>Another awesome heading</h2>
+          <h3>A Stacked heading</h3>
+          <p>
+            Lorem ipsum dolor sit amet dictumst in elit sagittis venenatis
+            senectus. Non nisi tortor enim pharetra rhoncus velit mauris arcu
+            senectus purus egestas urna sodales dolore. Egestas nisi turpis
+            hendrerit vivamus risus habitasse tincidunt in est enim egestas
+            dictumst sollicitudin.
+          </p>
+          <blockquote>
+            <p>
+              Lorem ipsum dolor sit pretium nullam diam facilisi. Lacus volutpat
+              malesuada fusce quis est integer euismod cras est suspendisse
+              facilisi morbi.
+            </p>
+          </blockquote>
+          <p>
+            Lorem ipsum dolor sit amet quis at praesent erat. Egestas justo ut
+            tempus elementum aenean luctus <a href="#">an awesome link</a> fusce
+            curabitur at malesuada.
+          </p>
+          <p>
+            Lorem ipsum dolor sit amet fermentum eget porta. Semper auctor
+            tellus laoreet ut vulputate ullamcorper fringilla gravida dictum.
+            Malesuada arcu aliquet cras molestie viverra vulputate netus dolore
+            aliquam dictum ornare ullamcorper. Erat pretium bibendum dolore quis
+            dictum vivamus libero curabitur consequat donec. Netus rhoncus
+            adipiscing netus non urna egestas mattis mollis nullam odio diam
+            dolore aenean.
+          </p>
+          <p>
+            Lorem ipsum dolor sit amet quis habitasse rhoncus ac lobortis
+            sapien.
+          </p>
+          <ol>
+            <li>Lorem ipsum dolor sit amet volutpat bibendum iaculis.</li>
+            <li>
+              Tortor porttitor elit nibh laoreet consectetur sodales imperdiet
+              congue duis blandit tempor phasellus.
+            </li>
+            <li>
+              Enim porta tincidunt non do gravida habitasse hendrerit convallis.
+            </li>
+          </ol>
+          <p>
+            Lorem ipsum dolor sit amet interdum incididunt tortor euismod
+            porttitor. Pulvinar consequat semper urna arcu etiam facilisi
+            elementum aenean dictumst aliquet urna elementum facilisi. Labore
+            duis fusce facilisi justo aliqua dictum et suspendisse dui dictum
+            integer. Elementum scelerisque posuere eleifend fermentum tempus
+            mauris elit enim etiam massa ornare congue. Hac pretium elit aliquam
+            augue dolore duis leo congue fringilla condimentum semper pretium
+            incididunt.
+          </p>
+          <p>
+            Est mattis enim eleifend donec erat eget tristique. Dictum habitasse
+            duis elementum feugiat elit pretium nisl curabitur lacus risus.
+            Condimentum vivamus hac vestibulum mauris aliquet massa ultrices
+            molestie. Tempor ut blandit fermentum id nisi facilisi turpis non.
+            Eleifend duis aliqua eu dapibus lacus consequat quam pulvinar et
+            aliqua luctus fames feugiat.
+          </p>
+        </div>
+
+        <!-- Post Footer -->
+        <footer
+          class="divide-y-gray-300/70 mx-auto mt-12 max-w-prose divide-y text-lg sm:mt-14"
+        >
+          <!-- Tags -->
+          <ul class="-m-1 flex flex-wrap justify-start pb-8 sm:pb-10">
+            <!-- Tag item -->
+            <li>
+              <a href="tag.html">
+                <span
+                  class="m-1 inline-flex items-center rounded-full border border-gray-300/70 bg-transparent px-4 py-1 text-sm font-medium text-gray-800 transition duration-300 ease-in-out hover:text-red-700 sm:px-6 sm:py-2"
+                >
+                  Trends
+                </span>
+              </a>
+            </li>
+
+            <!-- Tag item -->
+            <li>
+              <a href="tag.html">
+                <span
+                  class="m-1 inline-flex items-center rounded-full border border-gray-300/70 bg-transparent px-4 py-1 text-sm font-medium text-gray-800 transition duration-300 ease-in-out hover:text-red-700 sm:px-6 sm:py-2"
+                >
+                  Tips
+                </span>
+              </a>
+            </li>
+
+            <!-- Tag item -->
+            <li>
+              <a href="tag.html">
+                <span
+                  class="m-1 inline-flex items-center rounded-full border border-gray-300/70 bg-transparent px-4 py-1 text-sm font-medium text-gray-800 transition duration-300 ease-in-out hover:text-red-700 sm:px-6 sm:py-2"
+                >
+                  Lists
+                </span>
+              </a>
+            </li>
+
+            <!-- Tag item -->
+            <li>
+              <a href="tag.html">
+                <span
+                  class="m-1 inline-flex items-center rounded-full border border-gray-300/70 bg-transparent px-4 py-1 text-sm font-medium text-gray-800 transition duration-300 ease-in-out hover:text-red-700 sm:px-6 sm:py-2"
+                >
+                  Lessons
+                </span>
+              </a>
+            </li>
+
+            <!-- Tag item -->
+            <li>
+              <a href="tag.html">
+                <span
+                  class="m-1 inline-flex items-center rounded-full border border-gray-300/70 bg-transparent px-4 py-1 text-sm font-medium text-gray-800 transition duration-300 ease-in-out hover:text-red-700 sm:px-6 sm:py-2"
+                >
+                  Learnings
+                </span>
+              </a>
+            </li>
+          </ul>
+
+          <!-- Social Share Buttons -->
+          <div class="py-8 sm:py-10">
+            <div class="flex items-center justify-between">
+              <span class="text-lg font-medium text-gray-900"> Share </span>
+
+              <!-- Social Links -->
+              <ul class="flex items-center space-x-3">
+                <!-- Twitter -->
+                <li>
+                  <a
+                    href="#"
+                    class="group flex h-10 w-10 items-center justify-center rounded-full border border-gray-300/70 bg-transparent transition duration-300 ease-in-out sm:h-12 sm:w-12"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="h-4 w-4 transform text-gray-700 transition duration-300 ease-in-out group-hover:scale-110 group-hover:text-red-700"
+                      viewBox="0 0 512 512"
+                      fill="currentColor"
+                    >
+                      <path
+                        d="M496 109.5a201.8 201.8 0 01-56.55 15.3 97.51 97.51 0 0043.33-53.6 197.74 197.74 0 01-62.56 23.5A99.14 99.14 0 00348.31 64c-54.42 0-98.46 43.4-98.46 96.9a93.21 93.21 0 002.54 22.1 280.7 280.7 0 01-203-101.3A95.69 95.69 0 0036 130.4c0 33.6 17.53 63.3 44 80.7A97.5 97.5 0 0135.22 199v1.2c0 47 34 86.1 79 95a100.76 100.76 0 01-25.94 3.4 94.38 94.38 0 01-18.51-1.8c12.51 38.5 48.92 66.5 92.05 67.3A199.59 199.59 0 0139.5 405.6a203 203 0 01-23.5-1.4A278.68 278.68 0 00166.74 448c181.36 0 280.44-147.7 280.44-275.8 0-4.2-.11-8.4-.31-12.5A198.48 198.48 0 00496 109.5z"
+                      />
+                    </svg>
+                  </a>
+                </li>
+
+                <!-- Facebook -->
+                <li>
+                  <a
+                    href="#"
+                    class="group flex h-10 w-10 items-center justify-center rounded-full border border-gray-300/70 bg-transparent transition duration-300 ease-in-out sm:h-12 sm:w-12"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="h-4 w-4 transform text-gray-700 transition duration-300 ease-in-out group-hover:scale-110 group-hover:text-red-700"
+                      viewBox="0 0 512 512"
+                      fill="currentColor"
+                    >
+                      <path
+                        xmlns="http://www.w3.org/2000/svg"
+                        d="M480 257.35c0-123.7-100.3-224-224-224s-224 100.3-224 224c0 111.8 81.9 204.47 189 221.29V322.12h-56.89v-64.77H221V208c0-56.13 33.45-87.16 84.61-87.16 24.51 0 50.15 4.38 50.15 4.38v55.13H327.5c-27.81 0-36.51 17.26-36.51 35v42h62.12l-9.92 64.77H291v156.54c107.1-16.81 189-109.48 189-221.31z"
+                        fill-rule="evenodd"
+                      />
+                    </svg>
+                  </a>
+                </li>
+
+                <!-- Instagram -->
+                <li>
+                  <a
+                    href="#"
+                    class="group flex h-10 w-10 items-center justify-center rounded-full border border-gray-300/70 bg-transparent transition duration-300 ease-in-out sm:h-12 sm:w-12"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="h-4 w-4 transform text-gray-700 transition duration-300 ease-in-out group-hover:scale-110 group-hover:text-red-700"
+                      viewBox="0 0 512 512"
+                      fill="currentColor"
+                    >
+                      <path
+                        xmlns="http://www.w3.org/2000/svg"
+                        d="M349.33 69.33a93.62 93.62 0 0193.34 93.34v186.66a93.62 93.62 0 01-93.34 93.34H162.67a93.62 93.62 0 01-93.34-93.34V162.67a93.62 93.62 0 0193.34-93.34h186.66m0-37.33H162.67C90.8 32 32 90.8 32 162.67v186.66C32 421.2 90.8 480 162.67 480h186.66C421.2 480 480 421.2 480 349.33V162.67C480 90.8 421.2 32 349.33 32z"
+                      />
+                      <path
+                        xmlns="http://www.w3.org/2000/svg"
+                        d="M377.33 162.67a28 28 0 1128-28 27.94 27.94 0 01-28 28zM256 181.33A74.67 74.67 0 11181.33 256 74.75 74.75 0 01256 181.33m0-37.33a112 112 0 10112 112 112 112 0 00-112-112z"
+                      />
+                    </svg>
+                  </a>
+                </li>
+
+                <!-- Linkedin-->
+                <li>
+                  <a
+                    href="#"
+                    class="group flex h-10 w-10 items-center justify-center rounded-full border border-gray-300/70 bg-transparent transition duration-300 ease-in-out sm:h-12 sm:w-12"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="h-4 w-4 transform text-gray-700 transition duration-300 ease-in-out group-hover:scale-110 group-hover:text-red-700"
+                      viewBox="0 0 512 512"
+                      fill="currentColor"
+                    >
+                      <path
+                        xmlns="http://www.w3.org/2000/svg"
+                        d="M444.17 32H70.28C49.85 32 32 46.7 32 66.89v374.72C32 461.91 49.85 480 70.28 480h373.78c20.54 0 35.94-18.21 35.94-38.39V66.89C480.12 46.7 464.6 32 444.17 32zm-273.3 373.43h-64.18V205.88h64.18zM141 175.54h-.46c-20.54 0-33.84-15.29-33.84-34.43 0-19.49 13.65-34.42 34.65-34.42s33.85 14.82 34.31 34.42c-.01 19.14-13.31 34.43-34.66 34.43zm264.43 229.89h-64.18V296.32c0-26.14-9.34-44-32.56-44-17.74 0-28.24 12-32.91 23.69-1.75 4.2-2.22 9.92-2.22 15.76v113.66h-64.18V205.88h64.18v27.77c9.34-13.3 23.93-32.44 57.88-32.44 42.13 0 74 27.77 74 87.64z"
+                      />
+                    </svg>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Author Details -->
+          <div class="py-8 sm:py-10">
+            <div class="flex w-full items-center justify-between">
+              <div class="flex flex-col sm:flex-row">
+                <!-- Image -->
+                <div class="flex-shrink-0">
+                  <div class="relative w-fit">
+                    <img
+                      class="h-20 w-20 rounded-2xl object-cover object-center sm:h-24 sm:w-24"
+                      src="images/author-01.jpeg"
+                      alt=""
+                    />
+                    <span
+                      class="absolute inset-0 rounded-2xl shadow-inner"
+                      aria-hidden="true"
+                    ></span>
+                  </div>
+                </div>
+
+                <!-- Content -->
+                <div class="mt-5 text-left sm:ml-6 sm:mt-0">
+                  <div class="flex items-center justify-between">
+                    <div class="'flex flex-col">
+                      <p class="text-xs uppercase tracking-widest text-red-600">
+                        Staff Writer
+                      </p>
+                      <h1
+                        class="mt-1 text-xl font-medium tracking-normal text-gray-900 md:tracking-tight lg:leading-tight"
+                      >
+                        Mark Jackson
+                      </h1>
+                    </div>
+                  </div>
+
+                  <p class="mt-2.5 text-base leading-loose text-gray-500">
+                    Lorem ipsum dolor sit amet mauris quis phasellus ornare dui
+                    lectus. Laoreet habitasse eiusmod nulla odio tortor neque
+                    diam convallis morbi dolore molestie tellus faucibus
+                    pharetra.
+                  </p>
+
+                  <!-- Author Social Links -->
+                  <ul class="mt-3.5 flex items-center space-x-3">
+                    <li>
+                      <a href="#" class="group">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          class="h-5 w-5 text-gray-400 transition duration-300 ease-in-out group-hover:text-gray-600"
+                          viewBox="0 0 512 512"
+                          fill="currentColor"
+                        >
+                          <path
+                            d="M496 109.5a201.8 201.8 0 01-56.55 15.3 97.51 97.51 0 0043.33-53.6 197.74 197.74 0 01-62.56 23.5A99.14 99.14 0 00348.31 64c-54.42 0-98.46 43.4-98.46 96.9a93.21 93.21 0 002.54 22.1 280.7 280.7 0 01-203-101.3A95.69 95.69 0 0036 130.4c0 33.6 17.53 63.3 44 80.7A97.5 97.5 0 0135.22 199v1.2c0 47 34 86.1 79 95a100.76 100.76 0 01-25.94 3.4 94.38 94.38 0 01-18.51-1.8c12.51 38.5 48.92 66.5 92.05 67.3A199.59 199.59 0 0139.5 405.6a203 203 0 01-23.5-1.4A278.68 278.68 0 00166.74 448c181.36 0 280.44-147.7 280.44-275.8 0-4.2-.11-8.4-.31-12.5A198.48 198.48 0 00496 109.5z"
+                          />
+                        </svg>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#" class="group">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          class="h-5 w-5 text-gray-400 transition duration-300 ease-in-out group-hover:text-gray-600"
+                          viewBox="0 0 512 512"
+                          fill="currentColor"
+                        >
+                          <path
+                            xmlns="http://www.w3.org/2000/svg"
+                            d="M480 257.35c0-123.7-100.3-224-224-224s-224 100.3-224 224c0 111.8 81.9 204.47 189 221.29V322.12h-56.89v-64.77H221V208c0-56.13 33.45-87.16 84.61-87.16 24.51 0 50.15 4.38 50.15 4.38v55.13H327.5c-27.81 0-36.51 17.26-36.51 35v42h62.12l-9.92 64.77H291v156.54c107.1-16.81 189-109.48 189-221.31z"
+                            fill-rule="evenodd"
+                          />
+                        </svg>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#" class="group">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          class="h-5 w-5 text-gray-400 transition duration-300 ease-in-out group-hover:text-gray-600"
+                          viewBox="0 0 512 512"
+                          fill="currentColor"
+                        >
+                          <path
+                            xmlns="http://www.w3.org/2000/svg"
+                            d="M349.33 69.33a93.62 93.62 0 0193.34 93.34v186.66a93.62 93.62 0 01-93.34 93.34H162.67a93.62 93.62 0 01-93.34-93.34V162.67a93.62 93.62 0 0193.34-93.34h186.66m0-37.33H162.67C90.8 32 32 90.8 32 162.67v186.66C32 421.2 90.8 480 162.67 480h186.66C421.2 480 480 421.2 480 349.33V162.67C480 90.8 421.2 32 349.33 32z"
+                          />
+                          <path
+                            xmlns="http://www.w3.org/2000/svg"
+                            d="M377.33 162.67a28 28 0 1128-28 27.94 27.94 0 01-28 28zM256 181.33A74.67 74.67 0 11181.33 256 74.75 74.75 0 01256 181.33m0-37.33a112 112 0 10112 112 112 112 0 00-112-112z"
+                          />
+                        </svg>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#" class="group">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          class="h-5 w-5 text-gray-400 transition duration-300 ease-in-out group-hover:text-gray-600"
+                          viewBox="0 0 512 512"
+                          fill="currentColor"
+                        >
+                          <path
+                            xmlns="http://www.w3.org/2000/svg"
+                            d="M444.17 32H70.28C49.85 32 32 46.7 32 66.89v374.72C32 461.91 49.85 480 70.28 480h373.78c20.54 0 35.94-18.21 35.94-38.39V66.89C480.12 46.7 464.6 32 444.17 32zm-273.3 373.43h-64.18V205.88h64.18zM141 175.54h-.46c-20.54 0-33.84-15.29-33.84-34.43 0-19.49 13.65-34.42 34.65-34.42s33.85 14.82 34.31 34.42c-.01 19.14-13.31 34.43-34.66 34.43zm264.43 229.89h-64.18V296.32c0-26.14-9.34-44-32.56-44-17.74 0-28.24 12-32.91 23.69-1.75 4.2-2.22 9.92-2.22 15.76v113.66h-64.18V205.88h64.18v27.77c9.34-13.3 23.93-32.44 57.88-32.44 42.13 0 74 27.77 74 87.64z"
+                          />
+                        </svg>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </footer>
+      </div>
+    </article>
+
+    <!-- Up next -->
+    <section
+      class="relative h-96 w-full bg-fixed bg-center"
+      style="background-image: url(images/up-next.jpeg)"
+    >
+      <div class="absolute inset-0 bg-gray-900/50"></div>
+
+      <!-- Content -->
+      <div class="absolute inset-0">
+        <div
+          class="mx-auto flex h-full w-full max-w-xl flex-col items-center justify-center"
+        >
+          <span
+            href="#"
+            class="relative text-sm font-medium uppercase tracking-widest text-red-100"
+            >Next article</span
+          >
+          <h2
+            class="mt-3 text-center text-3xl font-medium tracking-normal text-white sm:text-4xl md:tracking-tight lg:text-5xl lg:leading-tight"
+          >
+            What the Future Holds: 10 Tech Predictions for 2030
+          </h2>
+        </div>
+      </div>
+
+      <a href="post.html" class="absolute inset-0"></a>
+    </section>
+
+    <!-- Newsletter -->
+    <section class="bg-gray-50 py-12 sm:py-20 lg:py-24">
+      <div class="mx-auto max-w-screen-xl px-5 sm:px-6 lg:px-8">
+        <!-- Content -->
+        <div class="mx-auto flex max-w-xl flex-col items-center text-center">
+          <img
+            src="images/paper-airplane.png"
+            class="h-auto w-24 animate-orbit"
+          />
+          <h2
+            class="mt-6 text-3xl font-medium tracking-normal text-gray-900 sm:mt-8 sm:text-4xl md:tracking-tight lg:text-5xl lg:leading-tight"
+          >
+            Get the most talked about stories directly in your inbox
+          </h2>
+          <p class="mt-4 text-lg leading-relaxed text-gray-500">
+            Every week we share the most relevant news in tech, culture and
+            entertainment. Join our community of over
+            <span class="font-medium text-gray-800">10,000 readers</span>.
+          </p>
+
+          <!-- Newsletter signup container -->
+          <div class="mt-8 flex w-full flex-col items-center sm:mt-10">
+            <div class="relative h-14 w-full max-w-xl rounded-3xl">
+              <!-- Newsletter signup form -->
+              <form
+                class="group rounded-3xl border border-gray-300/70 bg-transparent transition duration-300 ease-in-out"
+              >
+                <input
+                  type="email"
+                  class="h-14 w-full rounded-3xl border-0 border-transparent bg-white py-3.5 pl-6 pr-36 text-sm leading-5 text-gray-800 transition duration-300 ease-in-out hover:bg-transparent focus:bg-white focus:outline-none focus:ring-2 focus:ring-red-100"
+                  required
+                  placeholder="Enter your email"
+                  ,
+                  autocomplete="email"
+                />
+
+                <button
+                  type="submit"
+                  class="before:content-[&quot;&quot;] absolute right-3 top-1.5 inline-flex h-11 items-center bg-transparent px-4 py-2 text-tiny uppercase tracking-widest text-red-700 outline-none transition duration-300 ease-in-out before:absolute before:left-0 before:right-auto before:h-6 before:w-px before:bg-gray-300/70 before:transition before:duration-300 before:ease-in-out hover:text-red-600 focus:outline-none sm:font-medium md:px-6"
+                >
+                  Subscribe
+                </button>
+              </form>
+            </div>
+
+            <p class="mt-4 text-center text-sm text-gray-500">
+              Your privacy is important to us. We promise not to send you spam!
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-white py-12 sm:py-20 lg:py-24">
+      <div class="mx-auto max-w-2xl px-4 sm:px-6 lg:max-w-screen-xl lg:px-8">
+        <!-- Logo & Social Links -->
+        <div class="sm:flex sm:items-center sm:justify-between">
+          <!-- Logo -->
+          <div class="flex items-center justify-center">
+            <a href="index.html" class="block">
+              <img src="images/banter-logo.png" class="h-10 w-auto" />
+            </a>
+          </div>
+
+          <!-- Social Links-->
+          <div class="mt-6 flex items-center justify-center sm:mt-0">
+            <ul class="flex items-center space-x-3 sm:ml-4">
+              <li>
+                <a
+                  href="#"
+                  class="group flex h-10 w-10 items-center justify-center rounded-full border border-gray-300/70 bg-transparent transition duration-300 ease-in-out sm:h-12 sm:w-12"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-3.5 w-3.5 transform text-gray-700 transition duration-300 ease-in-out group-hover:scale-110 group-hover:text-red-700"
+                    viewBox="0 0 512 512"
+                    fill="currentColor"
+                  >
+                    <path
+                      d="M496 109.5a201.8 201.8 0 01-56.55 15.3 97.51 97.51 0 0043.33-53.6 197.74 197.74 0 01-62.56 23.5A99.14 99.14 0 00348.31 64c-54.42 0-98.46 43.4-98.46 96.9a93.21 93.21 0 002.54 22.1 280.7 280.7 0 01-203-101.3A95.69 95.69 0 0036 130.4c0 33.6 17.53 63.3 44 80.7A97.5 97.5 0 0135.22 199v1.2c0 47 34 86.1 79 95a100.76 100.76 0 01-25.94 3.4 94.38 94.38 0 01-18.51-1.8c12.51 38.5 48.92 66.5 92.05 67.3A199.59 199.59 0 0139.5 405.6a203 203 0 01-23.5-1.4A278.68 278.68 0 00166.74 448c181.36 0 280.44-147.7 280.44-275.8 0-4.2-.11-8.4-.31-12.5A198.48 198.48 0 00496 109.5z"
+                    />
+                  </svg>
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="group flex h-10 w-10 items-center justify-center rounded-full border border-gray-300/70 bg-transparent transition duration-300 ease-in-out sm:h-12 sm:w-12"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-3.5 w-3.5 transform text-gray-700 transition duration-300 ease-in-out group-hover:scale-110 group-hover:text-red-700"
+                    viewBox="0 0 512 512"
+                    fill="currentColor"
+                  >
+                    <path
+                      xmlns="http://www.w3.org/2000/svg"
+                      d="M480 257.35c0-123.7-100.3-224-224-224s-224 100.3-224 224c0 111.8 81.9 204.47 189 221.29V322.12h-56.89v-64.77H221V208c0-56.13 33.45-87.16 84.61-87.16 24.51 0 50.15 4.38 50.15 4.38v55.13H327.5c-27.81 0-36.51 17.26-36.51 35v42h62.12l-9.92 64.77H291v156.54c107.1-16.81 189-109.48 189-221.31z"
+                      fill-rule="evenodd"
+                    />
+                  </svg>
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="group flex h-10 w-10 items-center justify-center rounded-full border border-gray-300/70 bg-transparent transition duration-300 ease-in-out sm:h-12 sm:w-12"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-3.5 w-3.5 transform text-gray-700 transition duration-300 ease-in-out group-hover:scale-110 group-hover:text-red-700"
+                    viewBox="0 0 512 512"
+                    fill="currentColor"
+                  >
+                    <path
+                      xmlns="http://www.w3.org/2000/svg"
+                      d="M349.33 69.33a93.62 93.62 0 0193.34 93.34v186.66a93.62 93.62 0 01-93.34 93.34H162.67a93.62 93.62 0 01-93.34-93.34V162.67a93.62 93.62 0 0193.34-93.34h186.66m0-37.33H162.67C90.8 32 32 90.8 32 162.67v186.66C32 421.2 90.8 480 162.67 480h186.66C421.2 480 480 421.2 480 349.33V162.67C480 90.8 421.2 32 349.33 32z"
+                    />
+                    <path
+                      xmlns="http://www.w3.org/2000/svg"
+                      d="M377.33 162.67a28 28 0 1128-28 27.94 27.94 0 01-28 28zM256 181.33A74.67 74.67 0 11181.33 256 74.75 74.75 0 01256 181.33m0-37.33a112 112 0 10112 112 112 112 0 00-112-112z"
+                    />
+                  </svg>
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="group flex h-10 w-10 items-center justify-center rounded-full border border-gray-300/70 bg-transparent transition duration-300 ease-in-out sm:h-12 sm:w-12"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-3.5 w-3.5 transform text-gray-700 transition duration-300 ease-in-out group-hover:scale-110 group-hover:text-red-700"
+                    viewBox="0 0 512 512"
+                    fill="currentColor"
+                  >
+                    <path
+                      xmlns="http://www.w3.org/2000/svg"
+                      d="M444.17 32H70.28C49.85 32 32 46.7 32 66.89v374.72C32 461.91 49.85 480 70.28 480h373.78c20.54 0 35.94-18.21 35.94-38.39V66.89C480.12 46.7 464.6 32 444.17 32zm-273.3 373.43h-64.18V205.88h64.18zM141 175.54h-.46c-20.54 0-33.84-15.29-33.84-34.43 0-19.49 13.65-34.42 34.65-34.42s33.85 14.82 34.31 34.42c-.01 19.14-13.31 34.43-34.66 34.43zm264.43 229.89h-64.18V296.32c0-26.14-9.34-44-32.56-44-17.74 0-28.24 12-32.91 23.69-1.75 4.2-2.22 9.92-2.22 15.76v113.66h-64.18V205.88h64.18v27.77c9.34-13.3 23.93-32.44 57.88-32.44 42.13 0 74 27.77 74 87.64z"
+                    />
+                  </svg>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Footer Links Container -->
+        <div
+          class="mt-10 border-t border-t-gray-300/70 pt-10 md:flex md:items-center md:justify-between"
+        >
+          <!-- Footer Links -->
+          <nav
+            class="-mx-5 -my-2 flex flex-wrap items-center justify-center md:justify-start"
+            aria-label="Footer"
+          >
+            <a
+              href="index.html"
+              class="px-5 py-2 text-base text-gray-500 transition duration-300 ease-in-out hover:text-red-700"
+            >
+              Home
+            </a>
+
+            <a
+              href="about.html"
+              class="px-5 py-2 text-base text-gray-500 transition duration-300 ease-in-out hover:text-red-700"
+            >
+              About Banter
+            </a>
+
+            <a
+              href="contact.html"
+              class="px-5 py-2 text-base text-gray-500 transition duration-300 ease-in-out hover:text-red-700"
+            >
+              Contact us
+            </a>
+
+            <a
+              href="privacy-policy.html"
+              class="px-5 py-2 text-base text-gray-500 transition duration-300 ease-in-out hover:text-red-700"
+            >
+              Privacy Policy
+            </a>
+
+            <a
+              href="privacy-policy.html"
+              class="px-5 py-2 text-base text-gray-500 transition duration-300 ease-in-out hover:text-red-700"
+            >
+              Terms & Conditions
+            </a>
+          </nav>
+
+          <!-- Copyright Text -->
+          <p
+            class="ml-0 mt-8 flex shrink-0 items-center justify-center text-base text-gray-400 md:ml-6 md:mt-0"
+          >
+            Made with
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="mx-1 h-5 w-5"
+              width="44"
+              height="44"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              fill="none"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+              <path
+                d="M3 14c.83 .642 2.077 1.017 3.5 1c1.423 .017 2.67 -.358 3.5 -1c.83 -.642 2.077 -1.017 3.5 -1c1.423 -.017 2.67 .358 3.5 1"
+              ></path>
+              <path d="M8 3a2.4 2.4 0 0 0 -1 2a2.4 2.4 0 0 0 1 2"></path>
+              <path d="M12 3a2.4 2.4 0 0 0 -1 2a2.4 2.4 0 0 0 1 2"></path>
+              <path d="M3 10h14v5a6 6 0 0 1 -6 6h-2a6 6 0 0 1 -6 -6v-5z"></path>
+              <path d="M16.746 16.726a3 3 0 1 0 .252 -5.555"></path>
+            </svg>
+            <span>
+              by
+              <a
+                href="https://www.tailwindawesome.com/"
+                class="hover:underline"
+              >
+                Tailwind Awesome
+              </a>
+            </span>
+          </p>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
