@@ -793,7 +793,7 @@
                                 style="
                     z-index: -1;
                     background-image: url(images/instagram-01.jpeg);
-                  ">
+                ">
                             </div>
                             <div
                                 class="absolute inset-0 flex h-full w-full items-center justify-center bg-gradient-to-br opacity-0 transition duration-300 ease-in-out group-hover:opacity-90">
@@ -817,7 +817,7 @@
                                 style="
                     z-index: -1;
                     background-image: url(images/instagram-02.jpeg);
-                  ">
+                ">
                             </div>
                             <div
                                 class="absolute inset-0 flex h-full w-full items-center justify-center bg-gradient-to-br opacity-0 transition duration-300 ease-in-out group-hover:opacity-90">
@@ -841,7 +841,7 @@
                                 style="
                     z-index: -1;
                     background-image: url(images/instagram-03.jpeg);
-                  ">
+                ">
                             </div>
                             <div
                                 class="absolute inset-0 flex h-full w-full items-center justify-center bg-gradient-to-br opacity-0 transition duration-300 ease-in-out group-hover:opacity-90">
@@ -865,7 +865,7 @@
                                 style="
                     z-index: -1;
                     background-image: url(images/instagram-04.jpeg);
-                  ">
+                ">
                             </div>
                             <div
                                 class="absolute inset-0 flex h-full w-full items-center justify-center bg-gradient-to-br opacity-0 transition duration-300 ease-in-out group-hover:opacity-90">
@@ -889,7 +889,7 @@
                                 style="
                     z-index: -1;
                     background-image: url(images/instagram-05.jpeg);
-                  ">
+                ">
                             </div>
                             <div
                                 class="absolute inset-0 flex h-full w-full items-center justify-center bg-gradient-to-br opacity-0 transition duration-300 ease-in-out group-hover:opacity-90">
@@ -913,7 +913,7 @@
                                 style="
                     z-index: -1;
                     background-image: url(images/instagram-06.jpeg);
-                  ">
+                ">
                             </div>
                             <div
                                 class="absolute inset-0 flex h-full w-full items-center justify-center bg-gradient-to-br opacity-0 transition duration-300 ease-in-out group-hover:opacity-90">
