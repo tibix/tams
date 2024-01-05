@@ -67,12 +67,15 @@
                 </form>
             </ul>
             @auth
-                <form method="POST" action="/logout">
-                    @csrf
-                    <button class="btn btn-outline-light outline-light mx-2" type="submit">
-                        <i class="fa-solid fa-door-closed"></i> Logout
-                    </button>
-                </form>
+                @if( Auth::user()->role_id == 1 )
+                    @include('users.user-menu')
+                @elseif (Auth::user()->role_id == 2 )
+                    @include('users.journalist-menu')
+                @elseif (Auth::user()->role_id == 3 )
+                    @include('users.editor-menu')
+                @elseif (Auth::user()->role_id == 4 )
+                    @include('users.admin-menu')
+                @endif
             @else
             <a class="text-decoration-none text-white" href="/login">
                 <button class="btn btn-outline-light outline-light mx-2" type="submit">Autentifcare</button>
