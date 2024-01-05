@@ -14,9 +14,10 @@ return new class extends Migration
         Schema::create('notifications', function (Blueprint $table) {
             $table->id();
             $table->tinyText('message');
-            $table->integer('owner_id');
-            $table->integer('sender_id');
-            $table->integer('article_id');
+            $table->foreignId('user_id')->constrained();
+            $table->unsignedBigInteger('sender_id')->nullable();
+            $table->foreign('sender_id')->references('id')->on('users')->onDelete('set null');
+            $table->foreignId('article_id')->constrained();
             $table->enum('status', ['new', 'done'])->default('new');
             $table->timestamps();
         });
