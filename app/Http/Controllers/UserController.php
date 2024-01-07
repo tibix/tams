@@ -26,9 +26,9 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $formFields = $request->validate([
-            'u_name' => ['required', 'min:6', Rule::unique('users','u_name')],
-            'f_name' => ['min:3'],
-            'l_name' => ['min:3'],
+            'u_name' => ['required', 'min:4', Rule::unique('users','u_name')],
+            'f_name' => ['min:4'],
+            'l_name' => ['min:4'],
             'email' => ['required', 'email', Rule::unique('users','email')],
             'password' => 'required|confirmed|min:6'
         ]);
@@ -91,7 +91,7 @@ class UserController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return redirect('/')->with('message', 'You have been logged out!');
+        return redirect('/')->with('warning', 'You have been logged out!');
 
     }
 
@@ -112,7 +112,7 @@ class UserController extends Controller
         if (auth()->attempt(['email' => $user->email, 'password' => $request->password]) ||
             auth()->attempt(['u_name' => $user->u_name, 'password' => $request->password])) {
             auth()->loginUsingId($user->id);
-            return redirect('/');
+            return redirect('/')->with('success', 'You have been logged in!');
         } else {
             return redirect()->back()->withErrors(['password' => 'Invalid login credentials']);
         }

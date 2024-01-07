@@ -114,8 +114,14 @@
         </div>
     </div>
 </nav>
-<x-flash-messages />
-{{$slot}}
+<x-flash-message />
+{{ $slot }}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+    $("#alert").fadeTo(2000, 500).slideUp(500, function(){
+        $("#alert").slideUp(500);
+    });
+</script>
 <footer class="bg-warning text-center text-lg-start">
     <!-- Copyright -->
     <div class="text-center p-3">
