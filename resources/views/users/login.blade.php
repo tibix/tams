@@ -21,7 +21,7 @@
                                         placeholder="Email/Username"
                                         autofocus />
 
-                                    @error('email')
+                                    @error('login')
                                         <p class="text-danger fs-5">{{$message}}</p>
                                     @enderror
                                 </div>

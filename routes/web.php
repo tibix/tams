@@ -41,7 +41,7 @@ Route::get('/home', [UserController::class,'home'])->name('home')->middleware('a
 
 
 // Article routes
-Route::get('/articles/create', [ArticleController::class, 'create'])->name('articles.create');
+Route::get('/articles/create', [ArticleController::class, 'create'])->name('articles.create')->middleware('auth');
 Route::post('/articles', [ArticleController::class, 'store'])->name('articles.store');
 Route::get('/articles/{article}', [ArticleController::class, 'show'])->name('articles.show');
 Route::get('/articles/{article}/edit', [ArticleController::class, 'edit'])->name('articles.edit');

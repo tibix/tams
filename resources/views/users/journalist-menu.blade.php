@@ -4,7 +4,7 @@
     </button>
     <ul class="dropdown-menu dropdown-menu-end" id="dropDownMenu">
         <li>
-            <a class="dropdown-item" href="articol_nou.php">
+            <a class="dropdown-item" href="/articles/create">
                 <i class="fa-solid fa-newspaper"></i>
                 Articol nou
             </a>

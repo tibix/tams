@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Article;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ArticleController extends Controller
 {
@@ -21,6 +22,8 @@ class ArticleController extends Controller
     public function create()
     {
         //
+        $categories = DB::table('categories')->get();
+        return view('articles.create', compact('categories'));
     }
 
     /**

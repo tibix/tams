@@ -30,11 +30,12 @@ class UserController extends Controller
             'f_name' => ['min:4'],
             'l_name' => ['min:4'],
             'email' => ['required', 'email', Rule::unique('users','email')],
-            'password' => 'required|confirmed|min:6'
+            'password' => 'required|confirmed|min:5'
         ]);
 
         // hash password
         $formFields['password'] = bcrypt($formFields['password']);
+        $formFields['role_id'] = 1;
         $user = User::create($formFields);
 
         auth()->login($user);
@@ -101,12 +102,8 @@ class UserController extends Controller
         $login = $request->input('login');
         $user = User::where('email', $login)->orWhere('u_name', $login)->first();
 
-        if (!$user) {
-            return redirect()->back()->withErrors(['email' => 'Invalid login credentials']);
-        }
-
         $request->validate([
-            'password' => 'required|min:6',
+            'password' => 'required|min:5',
         ]);
 
         if (auth()->attempt(['email' => $user->email, 'password' => $request->password]) ||
@@ -114,7 +111,7 @@ class UserController extends Controller
             auth()->loginUsingId($user->id);
             return redirect('/')->with('success', 'You have been logged in!');
         } else {
-            return redirect()->back()->withErrors(['password' => 'Invalid login credentials']);
+            return back()->withErrors(['login' => 'Invalid login credentials'])->onlyInput('login');
         }
     }
 }
