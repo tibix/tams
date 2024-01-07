@@ -13,12 +13,12 @@
 
                                 <div class="form-outline form-white mb-4">
                                     <input
-                                        type="email"
-                                        name="email"
-                                        id="email"
+                                        type="text"
+                                        name="login"
+                                        id="login"
                                         class="form-control form-control-lg"
-                                        value="{{old('email')}}"
-                                        placeholder="Email"
+                                        value="{{old('login')}}"
+                                        placeholder="Email/Username"
                                         autofocus />
 
                                     @error('email')
