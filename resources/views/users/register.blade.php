@@ -19,7 +19,7 @@
                                                    placeholder="Enter username ..."/>
 
                                             @error('u_name')
-                                            <p class="text-danger fs-5">{{$message}}</p>
+                                                <p class="text-danger fs-5">{{$message}}</p>
                                             @enderror
                                         </div>
                                     </div>

@@ -87,5 +87,42 @@ class DatabaseSeeder extends Seeder
             'description' => 'Fashion presentations and the latest to wear',
             'created_at' => date("Y-m-d H:i:s"),
         ]);
+
+        DB::table('users')->insert([
+            'u_name' => 'tdascal',
+            'f_name' => 'Tiberiu',
+            'l_name' => 'Dascal',
+            'email' => 'tdascal@email.com',
+            'password' => bcrypt('tdascal'),
+            'role_id' => 1,
+            'created_at' => date("Y-m-d H:i:s"),
+        ]);
+        DB::table('users')->insert([
+            'u_name' => 'jurnalist',
+            'f_name' => 'Jurnalist',
+            'l_name' => 'Primar',
+            'email' => 'jurnalist@email.com',
+            'password' => bcrypt('jurnalist'),
+            'role_id' => 2,
+            'created_at' => date("Y-m-d H:i:s"),
+        ]);
+        DB::table('users')->insert([
+            'u_name' => 'editor',
+            'f_name' => 'Editor',
+            'l_name' => 'Primar',
+            'email' => 'editor@email.com',
+            'password' => bcrypt('editor'),
+            'role_id' => 3,
+            'created_at' => date("Y-m-d H:i:s"),
+        ]);
+        DB::table('users')->insert([
+            'u_name' => 'admin',
+            'f_name' => 'Admin',
+            'l_name' => 'Super',
+            'email' => 'admin@email.com',
+            'password' => bcrypt('admin'),
+            'role_id' => 4,
+            'created_at' => date("Y-m-d H:i:s"),
+        ]);
     }
 }

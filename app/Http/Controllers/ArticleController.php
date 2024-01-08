@@ -31,7 +31,28 @@ class ArticleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $formFields = $request->validate([
+            'title' => 'required',
+            'content' => 'required',
+            'category_id' => 'required',
+        ]);
+
+        if($request->hasFile('image'))
+        {
+            $formFields['image'] = $request->file('image')->store('image','public');
+        }
+
+        $formFields['user_id'] = auth()->id();
+        $formFields['state_id'] = 3;
+        $formFields['featured'] = 0;
+
+        $article = Article::create($formFields);
+        if(!$article)
+        {
+            return back()->with('error', 'A aparut o eroare la salvarea articolului!');
+        }
+
+        return redirect('/')->with('success', 'Articolul a fost creat cu success!');
     }
 
     /**
@@ -39,7 +60,9 @@ class ArticleController extends Controller
      */
     public function show(Article $article)
     {
-        //
+        return view('articles.show', [
+            'article' => $article
+        ]);
     }
 
     /**

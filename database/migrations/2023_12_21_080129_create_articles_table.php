@@ -29,6 +29,7 @@ return new class extends Migration
             $table->id();
             $table->string('title')->unique();
             $table->text('content');
+            $table->string('image')->nullable();
             $table->integer('featured')->default(0);
             $table->foreignId('user_id')->constrained();
             $table->foreignId('category_id')->constrained();
