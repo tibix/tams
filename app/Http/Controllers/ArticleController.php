@@ -21,7 +21,6 @@ class ArticleController extends Controller
      */
     public function create()
     {
-        //
         $categories = DB::table('categories')->get();
         return view('articles.create', compact('categories'));
     }
