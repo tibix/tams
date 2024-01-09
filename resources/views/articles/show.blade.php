@@ -13,7 +13,7 @@
 
             <h3 class="text-2xl mb-2">{{ $article->title }}</h3>
 
-            <img class="img-fluid rounded" src="{{ asset('storage/' . $article->image) }}" alt="" />
+            <img class="img-fluid rounded mb-3" src="{{ asset('storage/' . $article->image) }}" alt="" />
 
             <div class="border border-gray-200 w-full mb-6"></div>
             <div>
