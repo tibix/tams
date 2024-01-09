@@ -1,6 +1,6 @@
 <div class="btn-group">
     <button type="button" class="btn btn-outline-dark dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-        <i class="fa-solid fa-user-pen"> </i>  {{ Auth::user()->u_name }}
+        <i class="fa-solid fa-user-pen"> </i>  {{ auth()->user()->u_name }}
     </button>
     <ul class="dropdown-menu dropdown-menu-end" id="dropDownMenu">
         <li>

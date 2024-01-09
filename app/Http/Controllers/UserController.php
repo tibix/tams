@@ -55,7 +55,7 @@ class UserController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        return view('articles.edit', ['article' => $article]);
     }
 
     /**

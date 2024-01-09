@@ -13,7 +13,7 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        //
+        return view('articles.index', ['articles' => Article::all()]);
     }
 
     /**
@@ -69,7 +69,8 @@ class ArticleController extends Controller
      */
     public function edit(Article $article)
     {
-        //
+        $categories = DB::table('categories')->get();
+        return view('articles.edit', ['article' => $article] ,compact('categories'));
     }
 
     /**
@@ -77,14 +78,43 @@ class ArticleController extends Controller
      */
     public function update(Request $request, Article $article)
     {
-        //
+        // dd($request->file());
+
+        if($article->user_id != auth()->id())
+        {
+            abort(403, 'Unauthorized action!');
+        }
+
+        $formFields = $request->validate([
+            'title' => 'required',
+            'content' => 'required',
+            'category_id' => 'required',
+        ]);
+
+        if($request->hasFile('image'))
+        {
+            $formFields['image'] = $request->file('image')->store('image','public');
+        }
+
+        $formFields['state_id'] = $article->state_id;
+        $formFields['featured'] = $article->featured;
+
+        $article->update($formFields);
+
+        return back()->with('success', 'Article updated successfully!');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Article $article)
+    public function delete(Article $article)
     {
-        //
+        if($article->user_id != auth()->id())
+        {
+            abort(403, 'Unauthorized action!');
+        }
+
+        $article->delete();
+        return redirect('/')->with('success', 'Article deleted successfully!');
     }
 }

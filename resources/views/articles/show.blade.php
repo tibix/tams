@@ -1,9 +1,11 @@
 <x-layout>
+    @auth
     <div class="mx-4 mt-4">
         <p>
-            @if($article->user->id == auth()->user()->id)
-                <a class="bg-warning text-dark text-decoration-none" href="/articles/{{$article->id}}/edit"> &nbsp;Edit Article </a>&nbsp;&nbsp;&nbsp;
-            @endif
+                @if($article->user->id == auth()->user()->id)
+                    <a class="bg-warning text-dark text-decoration-none" href="/articles/{{$article->id}}/edit"> &nbsp;Edit Article </a>&nbsp;&nbsp;&nbsp;
+                @endif
+            @endauth
             <a href="#" class="text-decoration-none">
                 <span class="bg-dark text-light fw-bold">{{ $article->user->u_name }}</span>
             </a>
@@ -23,4 +25,5 @@
             </div>
         </div>
     </div>
+    @endauth
 </x-layout>
