@@ -16,6 +16,11 @@ class ArticleController extends Controller
         return view('articles.index', ['articles' => Article::all()]);
     }
 
+	public function category($category)
+	{
+		return view('articles.category', ['articles' => Article::where('category_id', '=', $category)->get()]);
+	}
+
     /**
      * Show the form for creating a new resource.
      */

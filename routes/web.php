@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Route;
 
 // Show index page
 Route::get('/', [ArticleController::class, 'index']);
+Route::get('/category/{category}', [ArticleController::class, 'category']);
 
 //Show register create form
 Route::get('/register', [UserController::class, 'create'])->name('register')->middleware('guest');

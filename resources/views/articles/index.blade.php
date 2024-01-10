@@ -6,8 +6,8 @@
             <div class="card">
                 <img src="{{ asset('storage/' . $article->image) }}" class="card-img-top" alt="...">
                 <div class="card-body">
-                    <h5 class="card-title">{{ $article->title}}</h5>
-                    <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                    <h5 class="card-title"><a href="/articles/{{$article->id}}" class="text-dark">{{ $article->title}}</a></h5>
+                    <p class="card-text">{{ substr($article->content,0,100) }}</p>
                 </div>
                 <div class="card-footer">
                     <a href="articles/{{$article->id}}/edit" class="btn btn-outline-dark bg-dark text-light"> <i class="fa fa-pen"></i> Edit</a>
@@ -36,7 +36,15 @@
                 <div class="card-body">
                     <h5 class="card-title"><a href="/articles/{{$article->id}}" class="text-dark">{{ $article->title}}</a></h5>
                 </div>
+				<div class="card-footer">
+					<p>
+						Author: <span class="fw-bold">{{ $article->user->u_name }}</span>
+						Category: <span class="fw-bold">{{$article->category->category}}</span>
+						Created: <span class="fst-italic">{{ $article->created_at }}</span>
+					</p>
+				</div>
             </div>
+
         </div>
         @endforeach
     </div>
