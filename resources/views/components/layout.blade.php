@@ -33,22 +33,22 @@
                     </a>
                     <ul class="dropdown-menu" id="categorii">
                         <li class="dropdown-item">
-                            <a class="nav-link" href="articole.php?categorie=2">
+                            <a class="nav-link" href="/category/2">
                                 <i class="fa-solid fa-microchip"></i> Tehnica
                             </a>
                         </li>
                         <li class="dropdown-item">
-                            <a class="nav-link" href="articole.php?categorie=1">
+                            <a class="nav-link" href="/category/1">
                                 <i class="fa-solid fa-palette"></i> Arta
                             </a>
                         </li>
                         <li class="dropdown-item">
-                            <a class="nav-link" href="articole.php?categorie=4">
+                            <a class="nav-link" href="/category/4">
                                 <i class="fa-solid fa-vest"></i> Moda
                             </a>
                         </li>
                         <li class="dropdown-item">
-                            <a class="nav-link" href="articole.php?categorie=3">
+                            <a class="nav-link" href="/category/3">
                                 <i class="fa-solid fa-flask"></i> Stiinta
                             </a>
                         </li>
@@ -99,12 +99,12 @@
                         <p>Platform noastra se adreseaza tuturor iubitorilor de stiinta, arta, tehnica si stinta, fie ca este consumator de articole sau chiar scriitor.</p>
                         <h3>Cum se foloseste acest produs?</h3>
                         <p>Utilizarea platformei este foarte facila.</p>
-                        <p>Iti creezi un cont <a class="text-decoration-none text-warning" href="inregistrare.php">aici</a> si ai acces ne-restrictionat la toate materialele publicate pe platforma noastra</p>
+                        <p>Iti creezi un cont <a class="text-decoration-none text-warning" href="/register">aici</a> si ai acces ne-restrictionat la toate materialele publicate pe platforma noastra</p>
                         <p>Ca si utilizator inregistrat poti, de asemenea, sa iti creezi o lista cu articolele favorite, pe care le poti re-citii oricand doresti</p>
                         <h3>Cum va pot contacta?</h3>
                         <p>Cel mai usor mod de a ne contacta este sa ne trimiti un <a class="text-decoration-none text-warning" href="mailto:example@email.com:">email</a></p>
                         <h3>Cum pot sa contribui si eu?</h3>
-                        Pentru a putea contribuii la platforma noastra, trebuie sa iti creezi un cont de jurnalist <a class="text-decoration-none text-warning" href="inregistrare.php">aici</a>.
+                        Pentru a putea contribuii la platforma noastra, trebuie sa iti creezi un cont de jurnalist <a class="text-decoration-none text-warning" href="/register">aici</a>.
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Inchide</button>

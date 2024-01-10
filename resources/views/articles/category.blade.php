@@ -1,6 +1,7 @@
 <x-layout>
 @auth
 	<div class="row row-cols-1 row-cols-md-3 g-4 my-3 mx-3">
+	@unless ($articles->isEmpty())
 	@foreach($articles as $article)
 		<div class="col">
 			<div class="card">
@@ -25,13 +26,16 @@
 					</form>
 				</div>
 				@endif
-				<div class="card-footer"><i class="fa-regular fa-heart"></i></div>
 			</div>
 		</div>
 	@endforeach
+	@else
+		<p class="text-center fw-bold">There are no articles in this category yet</p>
+	@endunless
 	</div>
 @else
 	<div class="row row-cols-1 row-cols-md-3 g-4 my-3 mx-3">
+		@unless ($articles->isEmpty())
 		@foreach($articles as $article)
 		<div class="col">
 			<div class="card">
@@ -47,9 +51,11 @@
 					</p>
 				</div>
 			</div>
-
 		</div>
 		@endforeach
+		@else
+			<p class="text-center fw-bold">There are no articles in this category yet</p>
+		@endunless
 	</div>
 @endauth
 </x-layout>
