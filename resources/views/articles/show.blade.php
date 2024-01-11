@@ -45,7 +45,7 @@
 			<div class="border border-gray-200 w-full mb-3"></div>
 			<div>
 				<div class="text-lg space-y-6 my-4">
-					<a href="/login" class="text-dark">Login</a> to see the full content of the page!
+					<p class="text-center"><a href="/login" class="text-dark">Login</a> to see the full content of the page!</p>
 				</div>
 			</div>
 		</div>
