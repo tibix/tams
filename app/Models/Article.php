@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Article extends Model
 {
@@ -25,5 +26,11 @@ class Article extends Model
 
     public function category(){
         return $this->belongsTo(Category::class, 'category_id');
+    }
+
+	public function getState($state_id)
+    {
+		$state = DB::table('states')->where('id', '=', $state_id)->first();
+        return $state->state;
     }
 }

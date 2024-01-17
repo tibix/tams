@@ -10,7 +10,7 @@
             </a>
         </li>
         <li>
-            <a class="dropdown-item" href="/articles/{{ auth()->user()->id }}">
+            <a class="dropdown-item" href="/articles/user/{{ auth()->user()->id }}">
                 <i class="fa-solid fa-list-ul"></i>
                 Articolele mele
             </a>
