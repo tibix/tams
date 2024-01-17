@@ -55,4 +55,10 @@ class User extends Authenticatable
     {
         return $this->hasMany(Favorite::class, 'user_id');
     }
+
+	public function getRole()
+    {
+		$role = Role::where('id', '=', $this->role_id)->first();
+        return $role->role;
+    }
 }

@@ -33,6 +33,7 @@
 		<p class="text-center fw-bold">There are no articles in this category yet</p>
 	@endunless
 	</div>
+	<div class="mx-5 my-2">{{ $articles->links() }}</div>
 @else
 	<div class="row row-cols-1 row-cols-md-3 g-4 my-3 mx-3">
 		@unless ($articles->isEmpty())
@@ -57,5 +58,6 @@
 			<p class="text-center fw-bold">There are no articles in this category yet</p>
 		@endunless
 	</div>
+	<div class="mx-5 my-2">{{ $articles->links() }}</div>
 @endauth
 </x-layout>

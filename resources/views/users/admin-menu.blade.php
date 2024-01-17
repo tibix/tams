@@ -24,7 +24,7 @@
         </li>
         <li><hr class="dropdown-divider"></li>
         <li>
-            <a class="dropdown-item" href="editare_profil.php">
+            <a class="dropdown-item" href="/users/{{auth()->id()}}/profile">
                 <i class="fa-solid fa-pen"></i>
                 Editare Profil
             </a>

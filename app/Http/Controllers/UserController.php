@@ -55,7 +55,7 @@ class UserController extends Controller
      */
     public function edit(string $id)
     {
-        return view('articles.edit', ['article' => $article]);
+        return view('users.profile');
     }
 
     /**
@@ -63,8 +63,27 @@ class UserController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $formFields = $request->validate(
+			[
+				'u_name' => ['required', 'min:4', Rule::unique('users','u_name')->ignore($id)],
+				'f_name' => ['min:4'],
+				'l_name' => ['min:4'],
+				'email' => ['required', 'email', Rule::unique('users','email')->ignore($id)]
+			]
+			);
+
+		$user = User::find($id);
+		$user->update($formFields);
+
+		return redirect('/')->with('success', 'User updated!');
     }
+
+	public function password_reset(Request $request, User $user)
+	{
+		$formField = $request->validate([
+			'password' => 'required',
+		]);
+	}
 
     /**
      * Remove the specified resource from storage.

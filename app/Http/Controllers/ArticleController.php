@@ -14,13 +14,13 @@ class ArticleController extends Controller
 	public function index()
 	{
 		return view('articles.index', [
-			'articles' => Article::orderBy('created_at', 'DESC')->paginate(3)
+			'articles' => Article::orderBy('created_at', 'DESC')->paginate(6)
 		]);
 	}
 
 	public function category($category)
 	{
-		return view('articles.category', ['articles' => Article::where('category_id', '=', $category)->get()]);
+		return view('articles.category', ['articles' => Article::where('category_id', '=', $category)->paginate(6)]);
 	}
 
 	/**
@@ -123,5 +123,12 @@ class ArticleController extends Controller
 
 		$article->delete();
 		return redirect('/')->with('success', 'Article deleted successfully!');
+	}
+
+	public function user()
+	{
+		return view('articles.user', [
+			'articles' => Article::where('user_id', '=', auth()->id())->paginate(3)
+		]);
 	}
 }
