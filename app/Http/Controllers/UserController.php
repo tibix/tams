@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Password;
+use Illuminate\Auth\Events\PasswordReset;
 
 class UserController extends Controller
 {
@@ -79,36 +82,48 @@ class UserController extends Controller
 		return redirect('/')->with('success', 'User updated!');
     }
 
-	public function password_reset_form()
+	public function forgot_password_view()
 	{
-		return view('users.password-reset');
+		return view('auth.forgot-password');
 	}
 
-	public function password_reset(Request $request, int $user)
+	public function forgot_password(Request $request)
 	{
-		dd($request);
-		$formField = $request->validate([
-			'current_password' => ['required', 'min:5'],
-			'new_password' => ['required', 'min:5'],
-			'new_password_confirmation' => ['required', 'min:5'],
+		$request->validate(['email' => 'required|email']);
+
+		$status = Password::sendResetLink(
+			$request->only('email')
+		);
+
+    	return $status === Password::RESET_LINK_SENT
+                ? back()->with(['status' => __($status)])
+                : back()->withErrors(['email' => __($status)]);
+	}
+
+	public function reset_password(Request $request)
+	{
+		$request->validate([
+			'token' => 'required',
+			'email' => 'required|email',
+			'password' => 'required|min:5|confirmed',
 		]);
 
-		$user = User::find($user);
-		if(Hash::check($formField['current_password'], $user->password))
-		{
-			if($formField['new_password'] != $formField['new_password_confirmation'])
-			{
-				return back()->withErrors(['new_password' => 'Passwords do not match'])->onlyInput('new_password');
-			} else {
-				$user->password = Hash::make($formField['new_password']);
+		$status = Password::reset(
+			$request->only('email', 'password', 'password_confirmation', 'token'),
+			function (User $user, string $password) {
+				$user->forceFill([
+					'password' => Hash::make($password)
+				])->setRememberToken(Str::random(60));
+
 				$user->save();
-				return redirect('/')->with('success', 'Password updated!');
+
+				event(new PasswordReset($user));
 			}
-		}
-		else
-		{
-			return back()->withErrors(['current_password' => 'Invalid password'])->onlyInput('current_password');
-		}
+		);
+
+		return $status === Password::PASSWORD_RESET
+					? redirect()->route('login')->with('status', __($status))
+					: back()->withErrors(['email' => [__($status)]]);
 	}
 
 	public function password_recover(Request $request, User $user)

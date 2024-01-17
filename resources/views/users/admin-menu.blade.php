@@ -30,7 +30,7 @@
             </a>
         </li>
         <li>
-            <a class="dropdown-item" href="resetare_parola.php">
+            <a class="dropdown-item" href="/forgot-password">
                 <i class="fa-solid fa-key"></i>
                 Resetarea Parola
             </a>

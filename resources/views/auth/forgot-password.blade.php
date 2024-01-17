@@ -13,6 +13,9 @@
 									<div class="form-outline form-white mb-4">
 										<input type="email" name="email" id="email" class="form-control form-control-lg"
 											   value="{{ old('email') }}" autofocus/>
+											   @error('email')
+												<p class="text-danger">{{ $message }}</p>
+											   @enderror
 										<label class="form-label" for="email">Email</label>
 									</div>
 									<button class="btn btn-dark btn-lg px-5" type="submit" name="recover_password">Trimite link-ul de recuperare cont!</button>
