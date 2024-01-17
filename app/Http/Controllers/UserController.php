@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -78,7 +79,39 @@ class UserController extends Controller
 		return redirect('/')->with('success', 'User updated!');
     }
 
-	public function password_reset(Request $request, User $user)
+	public function password_reset_form()
+	{
+		return view('users.password-reset');
+	}
+
+	public function password_reset(Request $request, int $user)
+	{
+		dd($request);
+		$formField = $request->validate([
+			'current_password' => ['required', 'min:5'],
+			'new_password' => ['required', 'min:5'],
+			'new_password_confirmation' => ['required', 'min:5'],
+		]);
+
+		$user = User::find($user);
+		if(Hash::check($formField['current_password'], $user->password))
+		{
+			if($formField['new_password'] != $formField['new_password_confirmation'])
+			{
+				return back()->withErrors(['new_password' => 'Passwords do not match'])->onlyInput('new_password');
+			} else {
+				$user->password = Hash::make($formField['new_password']);
+				$user->save();
+				return redirect('/')->with('success', 'Password updated!');
+			}
+		}
+		else
+		{
+			return back()->withErrors(['current_password' => 'Invalid password'])->onlyInput('current_password');
+		}
+	}
+
+	public function password_recover(Request $request, User $user)
 	{
 		$formField = $request->validate([
 			'password' => 'required',

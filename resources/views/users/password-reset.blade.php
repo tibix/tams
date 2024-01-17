@@ -1,5 +1,5 @@
 <x-layout>
-	<form method="POST" name="">
+	<form method="POST" name="/users/password-reset">
 		@csrf
 		@method('PUT')
 		<section class="gradient-custom">
@@ -13,18 +13,27 @@
 									<p class="text-dark-50 mb-5">Introdu parola curenta si noua parola de doua ori!</p>
 									<div class="form-outline form-white mb-4">
 										<input type="password" name="current_password" id="current_password" class="form-control form-control-lg"
-											   value="" autofocus />
+											   value="{{ old('current_password') }}" autofocus />
 										<label class="form-label" for="current_password">Parola Curenta</label>
+										@error('current_password')
+											<p class="text-danger fs-5">{{$message}}</p>
+										@enderror
 									</div>
 									<div class="form-outline form-white mb-4">
 										<input type="password" name="new_password" id="new_password" class="form-control form-control-lg"
-											   value="" />
+											   value="{{old('new_password')}}" />
 										<label class="form-label" for="new_password">Parola Noua</label>
+										@error('new_password')
+											<p class="text-danger fs-5">{{$message}}</p>
+										@enderror
 									</div>
 									<div class="form-outline form-white mb-4">
-										<input type="password" name="new_password_c" id="new_password_c" class="form-control form-control-lg"
-											   value="" />
-										<label class="form-label" for="new_password_c">Confirma Parola Noua</label>
+										<input type="password" name="new_password_confirmation" id="new_password_confirmation" class="form-control form-control-lg"
+											   value="{{old('new_password_confirmation')}}" />
+										<label class="form-label" for="new_password_confirmation">Confirma Parola Noua</label>
+										@error('new_password_confirmation')
+											<p class="text-danger fs-5">{{$message}}</p>
+										@enderror
 									</div>
 									<button class="btn btn-dark btn-lg px-5" type="submit" name="reset_password">Reseteaza Parola</button>
 								</div

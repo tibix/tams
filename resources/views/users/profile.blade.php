@@ -53,7 +53,7 @@
 					</div>
 					<div class="col-md-6 mb-4 pb-2">
 						<button type="submit" id="save_data" name="actualizare" class="btn btn-outline-warning mb-2">Salveaza Modificarile</button>
-						<a class="btn btn-danger float-end" href="resetare_parola.php">Reset Password</a>
+						<a class="btn btn-danger float-end" href="/users/password_reset_form">Reset Password</a>
 					</div>
 				</form>
 			</div>
