@@ -169,16 +169,16 @@ class UserController extends Controller
         $login = $request->input('login');
         $user = User::where('email', $login)->orWhere('u_name', $login)->first();
 
-        $request->validate([
-            'password' => 'required|min:5',
-        ]);
-
-        if (auth()->attempt(['email' => $user->email, 'password' => $request->password]) ||
-            auth()->attempt(['u_name' => $user->u_name, 'password' => $request->password])) {
-            auth()->loginUsingId($user->id);
-            return redirect('/')->with('success', 'You have been logged in!');
-        } else {
-            return back()->withErrors(['login' => 'Invalid login credentials'])->onlyInput('login');
-        }
-    }
+		if(!$user){
+			return back()->withErrors(['login' => 'Invalid login credentials'])->onlyInput('login');
+		} else {
+			if (auth()->attempt(['email' => $user->email, 'password' => $request->password]) ||
+				auth()->attempt(['u_name' => $user->u_name, 'password' => $request->password])) {
+				auth()->loginUsingId($user->id);
+				return redirect('/')->with('success', 'You have been logged in!');
+			} else {
+				return back()->withErrors(['login' => 'Invalid login credentials'])->onlyInput('login');
+			}
+		}
+	}
 }
