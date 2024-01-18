@@ -11,7 +11,7 @@
         </li>
         <li><hr class="dropdown-divider"></li>
         <li>
-            <a class="dropdown-item" href="favorites.php">
+            <a class="dropdown-item" href="/favorites">
                 <i class="fa-solid fa-bookmark"></i>
                 Favorite
             </a>

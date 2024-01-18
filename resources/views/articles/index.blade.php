@@ -26,7 +26,31 @@
                                 </form>
                             </div>
                         @endif
-                        <div class="card-footer"><i class="fa-regular fa-heart"></i></div>
+						<!-- Check if the article is added to the user's favorites -->
+						@if (auth()->user()->favorites->contains($article->id))
+                        	<div class="card-footer">
+								<form method="POST" action="/favorites">
+									@csrf
+									@method('DELETE')
+									<input type="hidden" name="article_id" value="{{ $article->id }}">
+									<input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
+									<button class="btn btn-outline-danger">
+										<i class="fa-solid fa-heart"></i>
+									</button>
+								</form>
+							</div>
+						@else
+							<div class="card-footer">
+								<form method="POST" action="/favorites">
+									@csrf
+									<input type="hidden" name="article_id" value="{{ $article->id }}">
+									<input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
+									<button type="submit" class="btn btn-outline-danger">
+										<i class="fa-regular fa-heart"></i>
+									</button>
+								</form>
+							</div>
+						@endif
                     </div>
                 </div>
             @endforeach

@@ -12,7 +12,8 @@ class FavoriteController extends Controller
      */
     public function index()
     {
-        //
+		$favorites = Favorite::where('user_id', auth()->id())->get();
+		return view('favorites.index', compact('favorites'));
     }
 
     /**
@@ -28,7 +29,13 @@ class FavoriteController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // Get the article id and the id of the user id and add it to the favorites table
+		$favorite = new Favorite();
+		$favorite->article_id = $request->article_id;
+		$favorite->user_id = $request->user_id;
+		$favorite->save();
+
+		return redirect()->back()->with('success', 'Article added to favorites');
     }
 
     /**
@@ -58,8 +65,10 @@ class FavoriteController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Favorite $favorite)
+    public function destroy(Request $request, Favorite $favorite)
     {
-        //
+		$favorite = Favorite::where('user_id', $request->user_id)->where('article_id', $request->article_id)->first();
+		$favorite->delete();
+		return redirect()->back()->with('success', 'Article removed from favorites');
     }
 }

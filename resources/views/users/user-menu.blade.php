@@ -4,7 +4,7 @@
     </button>
     <ul class="dropdown-menu dropdown-menu-end" id="dropDownMenu">
         <li>
-            <a class="dropdown-item" href="favorites.php">
+            <a class="dropdown-item" href="/favorites">
                 <i class="fa-solid fa-bookmark"></i>
                 Favorite
             </a>

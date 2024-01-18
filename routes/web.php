@@ -9,6 +9,7 @@ use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Auth\Events\PasswordReset;
 use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\FavoriteController;
 
 /*
 |--------------------------------------------------------------------------
@@ -51,3 +52,7 @@ Route::get('/articles/{article}/edit', [ArticleController::class, 'edit'])->name
 Route::put('/articles/{article}', [ArticleController::class, 'update'])->name('articles.update')->middleware('auth');
 Route::delete('/articles/{article}', [ArticleController::class, 'delete'])->name('articles.delete')->middleware('auth');
 
+// Favorite routes
+Route::post('/favorites', [FavoriteController::class, 'store'])->name('favorites.store')->middleware('auth');
+Route::delete('/favorites', [FavoriteController::class, 'destroy'])->name('favorites.delete')->middleware('auth');
+Route::get('/favorites', [FavoriteController::class, 'index'])->name('favorites.index')->middleware('auth');
