@@ -3,8 +3,8 @@
         <div class="row row-cols-1 row-cols-md-3 g-4 my-3 mx-3">
             @foreach ($articles as $article)
                 <div class="col">
-                    <div class="card">
-                        <img src="{{ asset('storage/' . $article->image) }}" class="card-img-top" alt="...">
+                    <div class="card h-100">
+                        <img src="{{ asset('storage/' . $article->image) }}" class="img-thumbnail card-img-top" alt="...">
                         <div class="card-body">
                             <h5 class="card-title"><a href="/articles/{{ $article->id }}"
                                     class="text-dark">{{ $article->title }}</a></h5>
@@ -27,7 +27,7 @@
                             </div>
                         @endif
 						<!-- Check if the article is added to the user's favorites -->
-						@if (auth()->user()->favorites->contains($article->id))
+						@if($article->isFavorite($article->id, auth()->user()->id))
                         	<div class="card-footer">
 								<form method="POST" action="/favorites">
 									@csrf
@@ -60,7 +60,7 @@
         <div class="row row-cols-1 row-cols-md-3 g-4 my-3 mx-3">
             @foreach ($articles as $article)
                 <div class="col">
-                    <div class="card">
+                    <div class="card h-100">
                         <img src="{{ asset('storage/' . $article->image) }}" class="card-img-top" alt="...">
                         <div class="card-body">
                             <h5 class="card-title"><a href="/articles/{{ $article->id }}"
@@ -69,7 +69,10 @@
                         <div class="card-footer">
                             <p>
                                 Author: <span class="fw-bold">{{ $article->user->u_name }}</span>
-                                Category: <span class="fw-bold">{{ $article->category->category }}</span>
+                                Category:
+								<a href="/articles/category/{{$article->category_id}}" class="text-dark">
+									<span class="fw-bold">{{ $article->category->category }}</span>
+								</a>
                                 Created: <span class="fst-italic">{{ $article->created_at }}</span>
                             </p>
                         </div>

@@ -24,13 +24,15 @@ use App\Http\Controllers\FavoriteController;
 
 // Show index page
 Route::get('/', [ArticleController::class, 'index']);
-Route::get('/category/{category}', [ArticleController::class, 'category']);
-
+Route::get('/info', function () {
+		return phpinfo();
+});
 //Show register create form
 Route::get('/register', [UserController::class, 'create'])->name('register')->middleware('guest');
 Route::post('/logout', [UserController::class, 'logout'])->middleware('auth');
 Route::get('/login', [UserController::class, 'login'])->name('login')->middleware('guest');
 Route::post('/users/authenticate', [UserController::class, 'authenticate']);
+Route::get('/users/gestiune/', [UserController::class, 'gestiune'])->name('users.gestiune')->middleware('auth');
 Route::get('/users/{user}/profile', [UserController::class, 'edit'])->name('users.profile')->middleware('auth');
 Route::put('/users/{user}', [UserController::class, 'update'])->name('users.update')->middleware('auth');
 Route::post('/users', [UserController::class, 'store']);
@@ -43,14 +45,20 @@ Route::get('/reset-password/{token}', function (string $token) {
 Route::post('/reset-password', [UserController::class, 'reset_password'])->name('password.update');
 
 // Article routes
+Route::get('/articles/gestiune', [ArticleController::class, 'gestiune'])->name('articles.gestiune')->middleware('auth');
 Route::get('/articles/create', [ArticleController::class, 'create'])->name('articles.create')->middleware('auth');
 Route::post('/articles', [ArticleController::class, 'store'])->name('articles.store')->middleware('auth');
+Route::post('/articles/search', [ArticleController::class, 'search'])->name('articles.search');
 Route::get('/articles/user/{user}', [ArticleController::class, 'user'])->name('articles.user')->middleware('auth');
-Route::get('/raticles/category/{category}', [ArticleController::class, 'category'])->name('articles.category');
+Route::get('/articles/category/{category}', [ArticleController::class, 'category'])->name('articles.category');
 Route::get('/articles/{article}', [ArticleController::class, 'show'])->name('articles.show');
 Route::get('/articles/{article}/edit', [ArticleController::class, 'edit'])->name('articles.edit')->middleware('auth');
 Route::put('/articles/{article}', [ArticleController::class, 'update'])->name('articles.update')->middleware('auth');
+Route::put('/articles/publish/{article}', [ArticleController::class, 'publish'])->name('articles.publish')->middleware('auth');
 Route::delete('/articles/{article}', [ArticleController::class, 'delete'])->name('articles.delete')->middleware('auth');
+Route::post('/articles/{article}/aproba', [ArticleController::class, 'aproba'])->name('articles.aproba')->middleware('auth');
+Route::post('/articles/{article}/respinge', [ArticleController::class, 'respinge'])->name('articles.aproba')->middleware('auth');
+
 
 // Favorite routes
 Route::post('/favorites', [FavoriteController::class, 'store'])->name('favorites.store')->middleware('auth');

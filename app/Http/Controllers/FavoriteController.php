@@ -33,7 +33,15 @@ class FavoriteController extends Controller
 		$favorite = new Favorite();
 		$favorite->article_id = $request->article_id;
 		$favorite->user_id = $request->user_id;
-		$favorite->save();
+
+		//check if article is already in favorites
+		$check = Favorite::where('user_id', $request->user_id)->where('article_id', $request->article_id)->first();
+		if($check)
+		{
+			return redirect()->back()->with('error', 'Article already in favorites');
+		} else {
+			$favorite->save();
+		}
 
 		return redirect()->back()->with('success', 'Article added to favorites');
     }

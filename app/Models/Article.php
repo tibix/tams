@@ -33,4 +33,15 @@ class Article extends Model
 		$state = DB::table('states')->where('id', '=', $state_id)->first();
         return $state->state;
     }
+
+	public function isFavorite($article_id, $user_id)
+	{
+		$check = DB::table('favorites')->where('user_id', '=', $user_id)->where('article_id', '=', $article_id)->first();
+		if($check)
+		{
+			return true;
+		} else {
+			return false;
+		}
+	}
 }

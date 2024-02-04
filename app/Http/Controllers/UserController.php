@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Article;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
@@ -148,8 +149,18 @@ class UserController extends Controller
 
     public function home()
     {
-        return view('users.home');
+		$my_drafts = Article::where('user_id' , '=', auth()->user()->id)->where('state_id', '=', '3')->get();
+		$my_published = Article::where('user_id', '=', auth()->user()->id)->where('state_id', '=', '1')->get();
+		$to_publish = Article::where('user_id', '!=', auth()->user()->id)->where('state_id', '=', '2')->get();
+		$other_published = Article::where('state_id', '=', '1')->where('user_id', '!=', auth()->user()->id)->get();
+        return view('users.home', compact('other_published', 'my_drafts', 'my_published', 'to_publish'));
     }
+
+	public function gestiune()
+	{
+		$users = User::where('role_id', '!=', 4)->paginate(10);
+		return view('users.gestiune', compact('users'));
+	}
 
     //Logout user
     public function logout(Request $request)

@@ -4,7 +4,7 @@
     </button>
     <ul class="dropdown-menu dropdown-menu-end" id="dropDownMenu">
         <li>
-            <a class="dropdown-item" href="gestionare_articole.php">
+            <a class="dropdown-item" href="/articles/gestiune">
                 <i class="fa-solid fa-list-ul"></i>
                 Gestioneaza Articole
             </a>

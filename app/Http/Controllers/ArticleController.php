@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Article;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Mockery\Matcher\Any;
 
 class ArticleController extends Controller
 {
@@ -61,6 +62,16 @@ class ArticleController extends Controller
 		return redirect('/')->with('success', 'Articolul a fost creat cu success!');
 	}
 
+	public function search(Request $request)
+	{
+		$search = $request->input('search');
+		return view('articles.search', [
+			'articles' => Article::where('title', 'LIKE', '%'.$search.'%')
+								 ->orWhere('content', 'LIKE', '%'.$search.'%')
+								 ->paginate(6)
+		]);
+	}
+
 	/**
 	 * Display the specified resource.
 	 */
@@ -71,6 +82,13 @@ class ArticleController extends Controller
 		]);
 	}
 
+	public function gestiune()
+	{
+		return view('articles.gestiune', [
+			'articles' => Article::where('state_id', '=', 2)->paginate(10)
+		]);
+	}
+
 	/**
 	 * Show the form for editing the specified resource.
 	 */
@@ -78,6 +96,38 @@ class ArticleController extends Controller
 	{
 		$categories = DB::table('categories')->get();
 		return view('articles.edit', ['article' => $article] ,compact('categories'));
+	}
+
+	public function aproba(Article $article, Request $request)
+	{
+		$article = Article::find($request->article_id);
+		$article->state_id = 1;
+		$article->save();
+
+		return back()->with('success', 'Article approved!');
+	}
+
+	public function respinge(Article $article, Request $request)
+	{
+		$article = Article::find($request->article_id);
+		$article->state_id = 3;
+		$article->save();
+
+		return back()->with('info', 'Article rejected!');
+	}
+
+	public function publish(Article $article)
+	{
+		if($article->user_id != auth()->id())
+		{
+			abort(403, 'Unauthorized action!');
+		}
+		if($article->state_id == 3){
+			$article->state_id = 2;
+			$article->save();
+		}
+
+		return back()->with('success', 'Article send for review!');
 	}
 
 	/**
@@ -128,7 +178,7 @@ class ArticleController extends Controller
 	public function user()
 	{
 		return view('articles.user', [
-			'articles' => Article::where('user_id', '=', auth()->id())->paginate(3)
+			'articles' => Article::where('user_id', '=', auth()->id())->paginate(10)
 		]);
 	}
 }

@@ -33,22 +33,22 @@
                     </a>
                     <ul class="dropdown-menu" id="categorii">
                         <li class="dropdown-item">
-                            <a class="nav-link" href="/category/2">
+                            <a class="nav-link" href="/articles/category/2">
                                 <i class="fa-solid fa-microchip"></i> Tehnica
                             </a>
                         </li>
                         <li class="dropdown-item">
-                            <a class="nav-link" href="/category/1">
+                            <a class="nav-link" href="/articles/category/1">
                                 <i class="fa-solid fa-palette"></i> Arta
                             </a>
                         </li>
                         <li class="dropdown-item">
-                            <a class="nav-link" href="/category/4">
+                            <a class="nav-link" href="/articles/category/4">
                                 <i class="fa-solid fa-vest"></i> Moda
                             </a>
                         </li>
                         <li class="dropdown-item">
-                            <a class="nav-link" href="/category/3">
+                            <a class="nav-link" href="/articles/category/3">
                                 <i class="fa-solid fa-flask"></i> Stiinta
                             </a>
                         </li>
@@ -61,7 +61,8 @@
                 </li>
             </ul>
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <form class="d-flex d-inline" action="search.php" method="GET">
+                <form class="d-flex d-inline" action="/articles/search" method="POST">
+					@csrf
                     <input class="form-control me-2 w-100" type="search" name="search" placeholder="Cauta..." aria-label="Search">
                     <button class="btn btn-outline-light" type="submit">Cautare</button>
                 </form>
